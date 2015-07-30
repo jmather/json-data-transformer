@@ -1,0 +1,6 @@
+{
+  "hello": {
+    "say": "Hello world!",
+    "repeat": 3
+  }
+}

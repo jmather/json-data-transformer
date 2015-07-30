@@ -1,0 +1,35 @@
+{
+  "name": "json-data-transformer",
+  "version": "1.0.0",
+  "description": "Json Data Transforming Tool",
+  "main": "index.js",
+  "bin": {
+    "json-data-transformer": "bin/transform.js"
+  },
+  "directories": {
+    "example": "examples"
+  },
+  "dependencies": {
+    "cli": "^0.9.0",
+    "pretty-data": "^0.40.0",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmather/json-data-transformer.git"
+  },
+  "keywords": [
+    "json",
+    "data"
+  ],
+  "author": "Jacob Mather <jmather@jmather.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jmather/json-data-transformer/issues"
+  },
+  "homepage": "https://github.com/jmather/json-data-transformer#readme"
+}
