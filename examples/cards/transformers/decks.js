@@ -30,6 +30,8 @@ DeckTransformer.process = function(input, output) {
  *
  * @param {string} name
  * @param {{suits: Array.<string>, faces: Array.<string>, extra: Array.<string>}} config
+ *
+ * @return {Array.<{type: string, suit: string, face: string}>}
  */
 DeckTransformer.processDeck = function(name, config) {
     var cards = [];
