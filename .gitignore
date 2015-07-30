@@ -1,5 +1,6 @@
 # Dev work
 .idea
+*.iml
 
 # Logs
 logs
