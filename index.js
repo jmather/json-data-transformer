@@ -39,11 +39,6 @@ function loadDataDirectory(prefix, directoryPath) {
         var key = file.substr(0, file.length -5);
         var fileData = JSON.parse(fs.readFileSync(filePath));
 
-        if (prefix === '') {
-            data[key] = fileData;
-            return;
-        }
-
         _.each(fileData, function(val, valKey) {
             data[prefix + key + '.' + valKey] = val;
         });

@@ -10,10 +10,8 @@ describe('Transformer', function() {
 
             var expects = {
                 'things.super.something': 'hello',
-                'things': {
-                    super: {
-                        fantastic: true
-                    }
+                'things.super': {
+                    fantastic: true
                 }
             };
 
