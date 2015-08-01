@@ -44,8 +44,14 @@ function getTrasformerModules(paths) {
     _.each(paths, function(path) {
         var dirFiles = fs.readdirSync(path);
         _.each(dirFiles, function(file) {
-            var filePath = process.cwd() + '/' + path + '/' + file.substr(0, file.length - 3);
+            var filePath = path + '/' + file.substr(0, file.length - 3);
+
+            if (filePath.substr(0, 1) !== '/') {
+                filePath = process.cwd() + '/' + filePath;
+            }
+            
             if (fs.lstatSync(filePath + '.js').isFile()) {
+
                 transformers.push(require(filePath));
             }
         });

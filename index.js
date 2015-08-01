@@ -14,7 +14,7 @@ Transformer.prototype.loadData = function(directories) {
     var data = {};
 
     _.each(directories, function(directory) {
-        _.extend(data, this.loadDataDirectory(process.cwd() + '/' + directory))
+        _.extend(data, this.loadDataDirectory(directory))
     }.bind(this));
 
     return data;
