@@ -14,7 +14,7 @@ function AnnouncementTransformer(config) {
  * @param {{announcements: Object.<string, {say: string, repeat: number}>}} input
  * @param {{announcements: Object.<string, Array.<string>>}} output
  */
-AnnouncementTransformer.process = function(input, output) {
+AnnouncementTransformer.prototype.process = function(input, output) {
     if (!input.announcements || input.announcements.length < 1) {
         return;
     }
@@ -22,8 +22,8 @@ AnnouncementTransformer.process = function(input, output) {
     output.announcements = {};
 
     _.each(input.announcements, function (config, name) {
-        output.announcements[name] = this.processAnnouncement(name, config);
-    }.bind(this));
+        output.announcements[name] = processAnnouncement(name, config);
+    });
 };
 
 /**
@@ -33,7 +33,7 @@ AnnouncementTransformer.process = function(input, output) {
  *
  * @return {Array.<string>}
  */
-AnnouncementTransformer.processAnnouncement = function(name, config) {
+function processAnnouncement(name, config) {
     var messages = [];
 
     var count = config.repeat || 1;
@@ -43,6 +43,6 @@ AnnouncementTransformer.processAnnouncement = function(name, config) {
     }
 
     return messages;
-};
+}
 
 module.exports = AnnouncementTransformer;

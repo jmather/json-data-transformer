@@ -15,6 +15,7 @@ function DeckTransformer(config) {
  * @param {{decks: Object.<string, [{type: string, suit: string, face: string}]>}} output
  */
 DeckTransformer.prototype.process = function(input, output) {
+    console.log('processing');
     if (!input.decks || input.decks.length < 1) {
         return;
     }

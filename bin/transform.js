@@ -16,15 +16,21 @@ cli.main(function(args, options) {
 
     var transformerModules = getTrasformerModules([options.transformerPath]);
 
-    var transformer = new Transformer(transformerModules);
+    var transformers = _.map(transformerModules, function(TransformerModule) {
+        return new TransformerModule({});
+    });
 
-    var data = transformer.build([options.configPath]);
+    var data = Transformer.loadData([options.configPath]);
 
-    var output = JSON.stringify(data);
+    var transformer = new Transformer(transformers);
+
+    var transformedData = transformer.transform(data);
+
+    var output = JSON.stringify(transformedData);
 
     if (options.pretty) {
         var pd = require('pretty-data').pd;
-        output = pd.json(data);
+        output = pd.json(transformedData);
     }
 
     if (options.outputPath) {

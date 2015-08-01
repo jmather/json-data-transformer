@@ -10,17 +10,17 @@ function Transformer(transformers) {
     this.transformers = transformers;
 }
 
-Transformer.prototype.loadData = function(directories) {
+Transformer.loadData = function(directories) {
     var data = {};
 
     _.each(directories, function(directory) {
-        _.extend(data, this.loadDataDirectory(directory))
-    }.bind(this));
+        _.extend(data, loadDataDirectory('', directory))
+    });
 
     return data;
 };
 
-Transformer.prototype.loadDataDirectory = function(directoryPath) {
+function loadDataDirectory(prefix, directoryPath) {
     var data = {};
 
     var files = fs.readdirSync(directoryPath);
@@ -37,33 +37,41 @@ Transformer.prototype.loadDataDirectory = function(directoryPath) {
         }
 
         var key = file.substr(0, file.length -5);
-        data[key] = JSON.parse(fs.readFileSync(filePath));
+        var fileData = JSON.parse(fs.readFileSync(filePath));
+
+        if (prefix === '') {
+            data[key] = fileData;
+            return;
+        }
+
+        _.each(fileData, function(val, valKey) {
+            data[prefix + key + '.' + valKey] = val;
+        });
+    });
+
+    _.each(directories, function(directory) {
+        _.extend(data, loadDataDirectory(directory + '.', directoryPath + '/' + directory))
     });
 
     return data;
-};
+}
 
-Transformer.prototype.build = function(directories) {
-    var data = this.loadData(directories);
+Transformer.prototype.transform = function(data) {
     var compiledData = {};
 
-    var transformers = _.each(this.transformers, function(Transformer) {
-        return new Transformer({});
-    });
-
-    _.each(transformers, function(transformer) {
+    _.each(this.transformers, function(transformer) {
         if (transformer.preProcess) {
             transformer.preProcess(data, compiledData);
         }
     });
 
-    _.each(transformers, function(transformer) {
+    _.each(this.transformers, function(transformer) {
         if (transformer.process) {
             transformer.process(data, compiledData);
         }
     });
 
-    _.each(transformers, function(transformer) {
+    _.each(this.transformers, function(transformer) {
         if (transformer.postProcess) {
             transformer.postProcess(data, compiledData);
         }
