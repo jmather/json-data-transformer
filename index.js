@@ -47,7 +47,8 @@ Transformer.prototype.build = function(directories) {
     var data = this.loadData(directories);
     var compiledData = {};
 
-    _.each(this.transformers, function(transformer) {
+    _.each(this.transformers, function(Transformer) {
+        var transformer = new Transformer({});
         transformer.process(data, compiledData);
     });
 

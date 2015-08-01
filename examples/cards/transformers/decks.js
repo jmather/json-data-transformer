@@ -14,7 +14,7 @@ function DeckTransformer(config) {
  * @param {{decks: Object.<string, {suits: Array.<string>, faces: Array.<string>, extra: Array.<string>}>}} input
  * @param {{decks: Object.<string, [{type: string, suit: string, face: string}]>}} output
  */
-DeckTransformer.process = function(input, output) {
+DeckTransformer.prototype.process = function(input, output) {
     if (!input.decks || input.decks.length < 1) {
         return;
     }
@@ -33,7 +33,7 @@ DeckTransformer.process = function(input, output) {
  *
  * @return {Array.<{type: string, suit: string, face: string}>}
  */
-DeckTransformer.processDeck = function(name, config) {
+DeckTransformer.prototype.processDeck = function(name, config) {
     var cards = [];
 
     _.each(config.suits, function(suit) {

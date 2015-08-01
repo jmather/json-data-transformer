@@ -49,7 +49,7 @@ function getTrasformerModules(paths) {
             if (filePath.substr(0, 1) !== '/') {
                 filePath = process.cwd() + '/' + filePath;
             }
-            
+
             if (fs.lstatSync(filePath + '.js').isFile()) {
 
                 transformers.push(require(filePath));
