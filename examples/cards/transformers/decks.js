@@ -22,7 +22,7 @@ DeckTransformer.prototype.process = function(input, output) {
     output.decks = {};
 
     _.each(input.decks, function (config, name) {
-        output.decks[name] = this.processDeck(name, config);
+        output.decks[name] = processDeck(name, config);
     }.bind(this));
 };
 
@@ -33,7 +33,7 @@ DeckTransformer.prototype.process = function(input, output) {
  *
  * @return {Array.<{type: string, suit: string, face: string}>}
  */
-DeckTransformer.prototype.processDeck = function(name, config) {
+function processDeck(name, config) {
     var cards = [];
 
     _.each(config.suits, function(suit) {
@@ -47,6 +47,6 @@ DeckTransformer.prototype.processDeck = function(name, config) {
     });
 
     return cards;
-};
+}
 
 module.exports = DeckTransformer;
